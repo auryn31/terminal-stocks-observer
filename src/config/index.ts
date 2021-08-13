@@ -33,9 +33,15 @@ const optionDefinitions = [
     type: Number,
     description: 'How high the plot should be',
   },
+  {
+    name: 'plotWidth',
+    alias: 'w',
+    type: Number,
+    description: 'How high the plot should be',
+  },
 ];
 
-const options = commandLineArgs(optionDefinitions);
+const options = commandLineArgs(optionDefinitions) as Options;
 
 const printOptions = () => {
   const usage = commandLineUsage([
@@ -56,6 +62,16 @@ const printOptions = () => {
 
 const plotConfig = {
   height: options.plotHeight ?? 10,
+  max: options.plotWidth ?? 20,
 };
+
+interface Options {
+  timeout: number | undefined;
+  plotHeight: number | undefined;
+  plotWidth: number | undefined;
+  config: string | undefined;
+  log: string | undefined;
+  help: boolean | undefined;
+}
 
 export { options, printOptions, plotConfig };
